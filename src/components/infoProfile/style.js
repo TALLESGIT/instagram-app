@@ -13,6 +13,7 @@ export const Link = styled.a`
     align-items: center;
     justify-content: center;
     gap: 12px;
+    cursor: pointer;
 
     &:hover{
         opacity: 0.7;

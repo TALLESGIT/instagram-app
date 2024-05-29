@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ThemeProvider } from "styled-components";
 import { Flex, Screen } from "./style";
@@ -7,17 +7,32 @@ import { NavBar } from "./components/navbar";
 import { Header } from "./components/header";
 import { Stories } from "./components/stories";
 import { Publications } from "./components/publications";
+import { getPhotos } from "./services/photo";
 
 function App() {
+  const PHOTOS_PER_PAGE = 20
+
   const [theme, setTheme] = useState("dark");
+  const [photos, setPhotos] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+  const [photosPerPage, setPhotosPerPage] = useState(PHOTOS_PER_PAGE)
+
+  const releaseLoading =  () => setLoading(false)
 
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
 
-  const api = import.meta.env.VITE_KEY_API_PEXELS;
-  
-  console.log(api);
+  async function fetchPhotos() {
+    const data = await getPhotos(photosPerPage, releaseLoading );
+    setPhotos(data);
+  }
+
+  console.log(photos)
+
+  useEffect(() => {
+    fetchPhotos();
+  }, []);
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
@@ -26,8 +41,8 @@ function App() {
 
         <Flex>
           <Header />
-          <Stories />
-          <Publications />
+          <Stories photos={photos}/>
+          <Publications photos={photos} />
         </Flex>
       </Screen>
     </ThemeProvider>

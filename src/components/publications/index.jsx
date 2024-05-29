@@ -1,23 +1,23 @@
-/* eslint-disable react/jsx-key */
-/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { Typography } from "../../style";
 import { InfoProfile } from "../infoProfile";
 
 import * as C from "./style";
 
-export function Publications() {
+export function Publications({ photos }) {
   return (
     <C.Container>
       <Typography>Publicações</Typography>
 
       <C.ContainerPublications>
-        {Array.from(Array(20)).map((item, index) => (
-          <C.Content>
-            <C.PublicationImage
-              src="https://avatars.githubusercontent.com/u/143969312?v=4"
-              alt="img  profile"
+        {photos.map((photo) => (
+          <C.Content key={photo?.id}>
+            <C.PublicationImage src={photo?.src?.medium} alt="img  profile" />
+            <InfoProfile
+              name={photo?.photographer}
+              photo={photo?.src?.small}
+              link={photo?.photographer_url}
             />
-            <InfoProfile />
           </C.Content>
         ))}
       </C.ContainerPublications>

@@ -1,12 +1,14 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 
 import { Button, Flex, Typography } from "../../style";
 import * as C from "./style";
 
-export function Stories() {
+export function Stories({photos}) {
   const [showAll, setShowAll] = useState(false);
 
-  const numberArray = showAll ? 20 : 8;
+  photos = showAll ? photos  : photos.slice(0, 10);
+
 
   function handleShowAll() {
     setShowAll(!showAll);
@@ -25,11 +27,11 @@ export function Stories() {
         </Button>
 
         <C.Container>
-          {Array.from(Array(numberArray)).map((item, index) => (
-            <C.Profile key={index}>
+          {photos.map((photo) => (
+            <C.Profile key={photo?.id}>
               <img
-                src="https://avatars.githubusercontent.com/u/143969312?v=4"
-                alt="img  profile"
+                src={photo?.src?.medium}
+                alt="fotografia"
               />
             </C.Profile>
           ))}
