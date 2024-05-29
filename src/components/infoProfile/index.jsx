@@ -1,18 +1,19 @@
+/* eslint-disable react/prop-types */
 import { AiFillHeart } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
-
+import { randomNumbers } from "../../utils/randomNumbers";
 import { Flex, Typography } from "../../style";
 
 import * as C from "./style";
 
-export function InfoProfile() {
+export function InfoProfile({ name, photo, link }) {
   return (
     <Flex direction="row" align="center" justify="space-between">
       <C.Container>
-        <C.Link>
-          <C.ProfileImage />
+        <C.Link href={link} target="_blank">
+          <C.ProfileImage src={photo} alt="img profile" />
           <Typography weight="300" size="13px" height="15px">
-            Tales
+            {name}
           </Typography>
         </C.Link>
       </C.Container>
@@ -20,12 +21,12 @@ export function InfoProfile() {
       <C.Container>
         <AiFillHeart color="red" />
         <Typography weight="300" size="13px" height="15px">
-          1234
+          {randomNumbers()}
         </Typography>
 
         <FaRegComment />
         <Typography weight="300" size="13px" height="15px">
-          52
+          {randomNumbers()}
         </Typography>
       </C.Container>
     </Flex>
