@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import breakPoints from "../../style/breakPoints";
 
 export const Container = styled.header`
   width: 100%;
@@ -7,6 +8,10 @@ export const Container = styled.header`
   align-items: center;
   justify-content: space-between;
   gap: 100px;
+
+  @media ${breakPoints.bg} {
+   padding: 20px 20px 10px 50px;
+  }
 `;
 
 export const Input = styled.input`

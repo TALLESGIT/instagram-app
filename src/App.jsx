@@ -37,6 +37,7 @@ function App() {
 
   console.log(photos);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     fetchPhotos();
   }, [photosPerPage]);
